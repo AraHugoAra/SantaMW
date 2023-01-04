@@ -28,11 +28,18 @@ function toysRoutes(app, db)  {
     // CREATE
     app.post('/toys', async (req, res) => {
         const body = {...req.body}
-        for(key in body){
-            var respDB = await db.query(
-            `INSERT toys ? VALUES ?`
-            ,[key, body[key]])
-        }
+        // for(key in body){
+        //     var respDB = await db.query(
+        //     `INSERT INTO toys ? VALUES ?`
+        //     ,[key, body[key]])
+        // }
+        const name = body.name
+        const description = body.description
+        const price = body.price
+        const category = body.category
+        var respDB = await db.query(
+            `INSERT INTO toys (name, description, price, category) VALUES (?, ?, ?, ?)`
+            ,[name, description, price, category])
         res.json({status: 200, respDB})
     })
     // DELETE
