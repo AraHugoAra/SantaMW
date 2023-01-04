@@ -10,7 +10,7 @@ function toysRoutes(app, db)  {
     app.get('/toys/:toyId', async (req, res) => {
         const toyId = req.params.toyId
         const respDB = await db.query(
-            'SELECT toys.name, toys.id, toys.description, toys.price, categories.name AS category FROM toys LEFT JOIN categories ON toys.category = categories.id WHERE id = ?'
+            'SELECT toys.name, toys.id, toys.description, toys.price, categories.name AS category FROM toys LEFT JOIN categories ON toys.category = categories.id WHERE toys.id = ?'
             ,[toyId])
         res.json({status: 200, respDB})
     })
